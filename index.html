@@ -78,39 +78,50 @@
 
         // Function to generate a random math problem
         function generateRandomProblem() {
-            const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-            const numbers2 = [3, 4, 6, 7, 8, 9];
+    const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const numbers2 = [3, 4, 6, 7, 8, 9];
 
-            const num1 = getRandomIntFromArray(numbers);
-            const num2 = getRandomIntFromArray(numbers2);
+    const num1 = getRandomIntFromArray(numbers);
+    const num2 = getRandomIntFromArray(numbers2);
 
-            const operations = ['+', '-', '*', '/'];
-            const operation = operations[getRandomIntFromArray([0, 1, 2, 3])];
+    const operations = ['+', '-', '*', '/'];
+    const operation = operations[getRandomIntFromArray([0, 1, 2, 3])];
 
-            let answer;
+    let answer;
 
-            switch (operation) {
-                case '+':
-                    answer = num1 + num2;
-                    break;
-                case '-':
-                    answer = num1 - num2;
-                    break;
-                case '*':
-                    answer = num1 * num2;
-                    break;
-                case '/':
-                    if (num2 === 0 || num1 % num2 !== 0) {
-                        return generateRandomProblem(); // Regenerate if invalid division
-                    }
-                    answer = num1 / num2;
-                    break;
-                default:
-                    throw new Error('Invalid operation');
+    switch (operation) {
+        case '+':
+            answer = num1 + num2;
+            break;
+        case '-':
+            // Ensure the result is not negative
+            if (num1 < num2) {
+                return generateRandomProblem(); // Regenerate the problem
             }
+            answer = num1 - num2;
+            break;
+        case '*':
+            answer = num1 * num2;
+            break;
+        case '/':
+            // Ensure no division by zero and result is an integer
+            if (num2 === 0 || num1 % num2 !== 0) {
+                return generateRandomProblem(); // Regenerate the problem
+            }
+            answer = num1 / num2;
+            break;
+        default:
+            throw new Error('Invalid operation');
+    }
 
-            return { num1, num2, operation, answer };
-        }
+    // Ensure the answer is not below 0 (general safeguard)
+    if (answer < 0) {
+        return generateRandomProblem(); // Regenerate the problem
+    }
+
+    return { num1, num2, operation, answer };
+}
+
 
         // Function to generate a list of problems
         function generateProblems() {
