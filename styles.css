@@ -1,0 +1,10 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.question, .answer {
+    font-size: 10em;
+    margin: 50px;
+}
