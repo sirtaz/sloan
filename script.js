@@ -28,9 +28,7 @@
             margin-bottom: 20px;
         }
         #results {
-            text-align: left;
-		font-size: 75px;
-            margin-bottom: 20px;	
+            text-align: left;	
         }
         #startButton {
             font-size: 75px;
